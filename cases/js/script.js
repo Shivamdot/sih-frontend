@@ -48,6 +48,45 @@ function updateCases() {
     });
 }
 
+function newCase(name) {
+    const URL = baseURL + "/newcase"
+    $('.loader').addClass('show');
+
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify({name: name}),
+        success: (data) => {
+            $('.cases  .case-list').append(`
+                <div class="case" id="${data.caseID}">
+                    <div class="name">
+                        <p>${data.name}</p>
+                    </div>
+                    <div class="caseID">
+                        <p>${data.caseID}</p>
+                    </div>
+                </div>
+            `)
+
+            $(`.cases .case-list .${data.caseID} .name p`).click(function(){
+                $('.loader').addClass('show')
+                let clickedID = $(this).parent().parent().attr('id');
+                localStorage.setItem("caseID", clickedID);     
+                let url = "/case";
+                window.location.href = url; 
+            });
+
+            $('.loader').removeClass('show')
+        },
+        error: (err) => {
+            $('.loader').removeClass('show')
+            console.log(err)
+        }
+    });
+}
+
 
 $(document).ready(function(){
     updateCases();
@@ -59,5 +98,21 @@ $('.nav .box .refresh').click(function() {
 });
 
 
+$('.nav .box .new').click(function() {
+    $('.addCase').addClass('show');
+});
 
+$('.addCase .box .submit').click(function() {
+    caseName = $('#case');
+    
+    isValid = 1
+    if(caseName.val() == '' || caseName.val() == null) {
+        isValid = 0;
+        console.log("provide a name error")
+    }
 
+    if(isValid){
+        $('.addCase').removeClass('show');
+        newCase(caseName.val());
+    }
+});

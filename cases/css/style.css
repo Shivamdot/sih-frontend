@@ -224,7 +224,8 @@ body {
 
 .addCase .box .case {
     width: 100%;
-    height: 30px;
+    height: 40px;
+    padding: 5px 10px;
 }
 
 .addCase .box .submit {
