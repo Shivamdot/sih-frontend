@@ -70,7 +70,7 @@ function newCase(name) {
                 </div>
             `)
 
-            $(`.cases .case-list .${data.caseID} .name p`).click(function(){
+            $(`.cases .case-list .case .name p`).click(function(){
                 $('.loader').addClass('show')
                 let clickedID = $(this).parent().parent().attr('id');
                 localStorage.setItem("caseID", clickedID);     
