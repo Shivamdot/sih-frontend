@@ -28,23 +28,25 @@ function updateCase(caseID) {
 
                 $('.main .target .sides').empty();
 
-                res_case.target.sides.forEach(side => {
-                    $('.main .target .sides').append(`
-                        <div class="side">
-                            <div class="blck">
-                                <img src="${baseURL + '/images/' + caseID + '/' + side.side + '.jpg'}" alt="">
-                            </div>
-                            <div class="info">
-                                <p class="name">Side : ${side.side}</p>
-                                <p class="feature">Features : error</p>
-                                <p class="clrs">Colors :- </p>
-                                <div class="colors">
-                                    ${getColor(side.colors)}
+                if(res_case.target.sides != null) {
+                    res_case.target.sides.forEach(side => {
+                        $('.main .target .sides').append(`
+                            <div class="side">
+                                <div class="blck">
+                                    <img src="${baseURL + '/images/' + caseID + '/' + side.side + '.jpg'}" alt="">
+                                </div>
+                                <div class="info">
+                                    <p class="name">Side : ${side.side}</p>
+                                    <p class="feature">Features : error</p>
+                                    <p class="clrs">Colors :- </p>
+                                    <div class="colors">
+                                        ${getColor(side.colors)}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    `)
-                });
+                        `)
+                    });
+                }
                 
                 $('.loader').removeClass('show')
             }
