@@ -90,3 +90,42 @@ function initMap() {
     });
   };
 }
+
+function updateAnalysis(caseID) {
+    const URL = baseURL + "/case"
+
+    $('.loader').addClass('show');
+
+    $.ajax({
+      url: URL,
+      type: 'GET',
+      beforeSend: function(request) {
+          request.setRequestHeader("caseID", caseID);
+      },
+      success: function(data){
+        if(data.error){
+          $('.loader').removeClass('show')
+          console.log(data.error);
+        } else {
+          $('.loader').removeClass('show')
+          analysis = data.case.analysis;
+          console.log(analysis)
+        } 
+      },
+      error: function(err) {
+          $('.loader').removeClass('show')
+          console.log("error" + err);
+      }
+  });
+}
+
+$(document).ready(function(){
+  let caseID = localStorage.getItem('caseID');
+  if(caseID) {
+      updateAnalysis(caseID);
+  } else {
+      console.log('CaseID not found');
+      let url = "/cases";
+      window.location.href = url; 
+  }
+});
