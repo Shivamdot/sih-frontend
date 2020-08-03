@@ -89,7 +89,7 @@ function updateRecord(record, videoID) {
             <div class="filename"><p>${filename}</p></div>
             <div class="date"><p>${det.day}-${det.month}-${det.year}</p></div>
             <div class="time"><p>${det.hour}:${det.minute}</p></div>
-            <div class="down"><p>click</p></div>
+            <div class="down"><p><a href="${link}">Click</a></p></div>
         </div>
       `)
     })
