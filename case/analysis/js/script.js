@@ -71,7 +71,7 @@ function updateAnalysis(caseID) {
 }
 
 function updateRecord(record, videoID) {
-  $('.search .record .data').empty;
+  $('.search .record .data').empty();
   record.forEach(ele => {
     let vid = ele.vid;
     let filename;
